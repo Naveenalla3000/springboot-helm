@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  spring-helm:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-12-15T19:08:46.465251+05:30"
+    description: A Helm chart for deploying Spring Boot and PostgreSQL
+    digest: 47a0cc38ad990ac4ac6a80b435b4d960eaf50ffba9fddf150dc3c20cf2357dfc
+    name: spring-helm
+    type: application
+    urls:
+    - spring-helm-1.0.0.tgz
+    version: 1.0.0
+generated: "2024-12-15T19:08:46.464162+05:30"

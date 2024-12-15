@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-spring-app
+  labels:
+    app: {{ .Release.Name }}-spring-app
+spec:
+  replicas: {{ .Values.springApp.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-spring-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-spring-app
+    spec:
+      containers:
+        - name: spring-app
+          image: {{ .Values.springApp.image }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgres-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgres-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgres-secrets
+                  key: POSTGRES_DB
+            - name: SPRING_DATASOURCE_URL
+              value: {{ include "my-spring-app.fullPostgresConnectionURL" . | quote }}

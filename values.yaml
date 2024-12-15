@@ -1,0 +1,20 @@
+postgres:
+  username: postgres
+  password: postgres
+  database: springdb
+  persistence:
+    enabled: true
+    storageSize: 1Gi
+
+springApp:
+  image: naveenalla/spring-app-helm
+  replicas: 2
+
+service:
+  type: NodePort
+  port: 8080
+
+ingress:
+  enabled: true
+  host: sam-spring-app.local  # Change this to your domain or use localhost for local testing
+
